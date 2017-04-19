@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>MensaApp</title>
+    <link rel="stylesheet" href="resources/css/default.css">
+</head>
+
+<body>
+    <content>
+        <div class="week-day-selectors">
+            <span class="week-day-selector monday" data-weekday="monday">MO</span>
+            <span class="week-day-selector tuesday" data-weekday="tuesday">DI</span>
+            <span class="week-day-selector wednesday" data-weekday="wednesday">MI</span>
+            <span class="week-day-selector thursday" data-weekday="thursday">DO</span>
+            <span class="week-day-selector friday" data-weekday="friday">FR</span>
+        </div>
+
+        <div class="todays-menu">
+            <span class="text">Heute gibt es in der Uni Mensa <span class="main-dish">Gericht 1</span>, <span class="main-dish">Gericht 2</span> und <span class="main-dish">Gericht 3</span>. Dazu empfiehlt der Küchenchef <span class="side-dish">Beilage 1</span>, <span class="side-dish">Beilage 2</span> oder <span class="side-dish">Beilage 3</span>. Wie wäre es danach mit <span class="dessert">Nachspeise 1</span> oder <span class="dessert">Nachspeise 2</span>?</span>
+        </div>
+    </content>
+    <script src="resources/js/helper/request.js"></script>
+    <script src="resources/js/MensaApp.js"></script>
+    <script src="resources/js/DaySelector.js"></script>
+    <script src="resources/js/MessageGenerator.js"></script>
+    <script src="resources/js/DataProvider.js"></script>
+    <script>
+    MensaApp.init();
+    </script>
+</body>
+
+</html>

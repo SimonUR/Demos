@@ -1,0 +1,63 @@
+@keyframes backgroundScroll {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 -500px;
+    }
+}
+
+.button.start {
+    transition: box-shadow 0.3s, top 0.3s;
+}
+
+.button.start:active {
+    box-shadow: 0px 2px 0px rgb(121, 35, 23);
+    position: relative;
+    top: 7px;
+}
+
+.move-slow {
+    animation-name: backgroundScroll;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.move-medium {
+    animation-name: backgroundScroll;
+    animation-duration: 2.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.move-fast {
+    animation-name: backgroundScroll;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.move-finish {
+    transition: background-position 1s;
+}
+
+.move-to-seven {
+    background-position: 0 0;
+}
+
+.move-to-lemon {
+    background-position: 0 -100px;
+}
+
+.move-to-melon {
+    background-position: 0 -200px;
+}
+
+.move-to-plum {
+    background-position: 0 -300px;
+}
+
+.move-to-cherry {
+    background-position: 0 -400px;
+}

@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>TodoList</title>
+    <link rel="stylesheet" href="resources/css/default.css">
+    <link rel="stylesheet" href="resources/css/todo-list.css">
+</head>
+
+<body>
+    <header>
+        <h1>TodoList</h1>
+    </header>
+    <div class="decal"></div>
+    <content>
+        <div id="todo-list" class="todo-list">
+            <input class="add-new-item-input" type="text" placeholder="Insert new task" />
+            <ul class="all-items-list">
+                <!-- Tasks will be added here as seperat li elements -->
+            </ul>
+        </div>
+    </content>
+    <script src="vendors/mme-helper/mme-helper.js"></script>
+    <script src="resources/js/TodoList.js"></script>
+    <script src="resources/js/TodoList-Model.js"></script>
+    <script src="resources/js/TodoList-ViewController.js"></script>
+    <script>
+        TodoList.init();
+    </script>
+</body>
+
+</html>

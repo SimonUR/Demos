@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Painter</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/default.css">
+    <link rel="stylesheet" href="resources/css/app.css">
+</head>
+
+<body>
+    <header>
+        <h1>Painter</h1>
+        <ul id="menu">
+        </ul>
+    </header>
+    <div class="decal"></div>
+    <content>
+        <div class="sidebar">
+            <div class="tools box">
+                <span class="item tool circle selected" value="circle"><i class="fa fa-circle"></i></span>
+                <span class="item tool square" value="square"><i class="fa fa-square"></i></span>
+                <span class="item tool line" value="line"><i class="fa fa-minus"></i></span>
+                <span class="item tool eraser" value="eraser"><i class="fa fa-eraser"></i></span>
+                <span class="item action undo" value="undo"><i class="fa fa-undo"></i></span>
+                <span class="item action new" value="new"><i class="fa fa-file-image-o"></i></span>
+                <span class="item action save" value="save"><i class="fa fa-floppy-o"></i></span>
+            </div>
+            <div class="colors box">
+                <span class="item color black" value="black"></span>
+                <span class="item color white" value="white"></span>
+                <span class="item color red" value="red"></span>
+                <span class="item color green" value="green"></span>
+                <span class="item color blue" value="blue" ></span>
+                <span class="item color yellow" value="yellow"></span>
+                <span class="preview color white" ></span>
+            </div>
+        </div>
+        <canvas class="canvas" width="800" height="800"></canvas>
+    </content>
+    <script src="resources/js/EventPublisher.js"></script>
+    <script src="resources/js/Painter.js"></script>
+    <script src="resources/js/PainterModel.js"></script>
+    <script src="resources/js/PaletteView.js"></script>
+    <script src="resources/js/ToolboxView.js"></script>
+    <script src="resources/js/CanvasController.js"></script>
+    <script>
+        Painter.init();
+    </script>
+</body>
+
+</html>

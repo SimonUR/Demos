@@ -1,0 +1,84 @@
+@font-face {
+    font-family: "Rokkitt";
+    src: url("./fonts/Rokkitt/Rokkitt-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    margin: 0;
+    background: #343477;
+    font-family: 'Rokkitt', serif;
+    color: #333;
+}
+
+content {
+    flex: 1;
+    min-height: 100%;
+    padding: 25px;
+    margin-top: 90px;
+}
+
+.week-day-selectors {
+    width: 434px;
+    margin: 0 auto;
+}
+
+.week-day-selector {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 15px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #010104;
+    background-color: #9494FA;
+    line-height: 50px;
+    text-align: center;
+    color: #010104;
+    font-size: 22px;
+    text-transform: capitalize;
+}
+
+.week-day-selector:hover, .week-day-selectors .active {
+    border-color: #9494FA;
+    background-color: #010104;
+    color: #9494FA;
+    cursor: pointer;
+}
+
+.todays-menu {
+    width: 70%;
+    margin: 50px auto;
+}
+
+.todays-menu .text {
+    display: block;
+    width: 100%;
+    margin: 45px 0;
+    text-align: center;
+    font-size: 30px;
+    line-height: 1.25em;
+    color: #9494FA;
+}
+
+.todays-menu .main-dish {
+    color: #F982F9;
+}
+
+.todays-menu .side-dish {
+    color: #FFF485;
+}
+
+.todays-menu .dessert {
+    color: #EBFE85;
+}

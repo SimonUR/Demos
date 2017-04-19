@@ -1,0 +1,45 @@
+<!--
+Slot icons: http://all-free-download.com/free-vector/download/slot_machine_icons_310830.html
+Machine sound: https://freesound.org/people/VlatkoBlazek/sounds/260878/
+Win sound: https://freesound.org/people/themanitou/sounds/186717/
+Lose sound: https://freesound.org/people/themanitou/sounds/186709/
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>SlotMachine</title>
+    <link rel="stylesheet" href="resources/css/default.css">
+    <link rel="stylesheet" href="resources/css/animations.css">
+    <link rel="stylesheet" href="resources/css/effects.css">
+</head>
+
+<body>
+    <header>
+        <h1>SlotMachine</h1>
+        <ul id="menu">
+        </ul>
+    </header>
+    <div class="decal"></div>
+    <content>
+        <div class="machine shadow gradient">
+            <ul class="reels">
+                <li class="reel first"></li>
+                <li class="reel second"></li>
+                <li class="reel third"></li>
+            </ul>
+            <a href="#" class="button start shadow">Start</a>
+        </div>
+    </content>
+    <script src="vendors/audio-extension/audio-extension.js"></script>
+    <script src="vendors/event-publisher/EventPublisher.js"></script>
+    <script src="resources/js/SlotMachineGame.js"></script>
+    <script src="resources/js/SlotMachine.js"></script>
+    <script src="resources/js/Reel.js"></script>
+    <script>
+        SlotMachineGame.init();
+    </script>
+</body>
+
+</html>

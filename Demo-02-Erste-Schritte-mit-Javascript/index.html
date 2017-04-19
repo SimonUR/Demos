@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Erste Schritte mit Javascript</title>
+    <link rel="stylesheet" href="resources/css/default.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="title">Erste Schritte mit Javascript</h1>
+    </header>
+    <content>
+        <section id="intro">
+            <h1>Javascript</h1>
+            <blockquote class="quote-box" cite="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+                <p>
+                    JavaScript (JS) is a lightweight, interpreted, programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as node.js and Apache CouchDB. JS is a prototype-based, multi-paradigm, dynamic scripting language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles. Read more about JavaScript.</p>
+                    <span class="quote-author">
+                        Javascript | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" class="quote-link">Mozilla Developer Network</a>
+                    </span>
+                </blockquote>
+            </section>
+            <section id="tasks">
+                <div class="task">
+                    <h1>Einfache Manipulationen</h1>
+                    <span class="description">
+                        <p>
+                            Der untenstehende Absatz wird durch die folgende HTML-Auszeichnung erzeugt: 
+                        </p>
+                        <code class="block">
+                            &lt;span class="text-with-blanks"&gt;
+                            Hallo, &lt;span class="placeholder name">NAME&lt;/span&gt;. Dies ist ein erster Javascript-Test und stellt sicher, dass wir mit den grundsätzlichen Selektionsmechanismen in Javascript vertraut sind.&lt;/span&gt;
+                        </code>
+                        <p>
+                            Selektieren Sie das hervorgehobenen Element mit dem Inhalt "NAME" und ersetzen Sie dessen Inhalt mit Ihrem eigenen Namen. Für die Selektion kann die Methode <code>document.querySelector()</code> mit einem passenden Selektor als Parameter verwendet werden. Auf den enthaltenen Text kann mit der Eigenschaft <code>innerHTML</code> des <code>Element</code>-Objekts zugegriffen werden, dass Sie als Rückgabe der <code>querySelector</code>-Funktion erhalten.
+                        </p>
+                        <p>
+                            Entfernen Sie in einem zweiten Schritt die Klasse <code>placeholder</code> aus dem selektierten Element. Sie können über die Eigenschaft <code>classList</code> auf eine <a href="https://developer.mozilla.org/de/docs/Web/API/Element/classList">Objektrepräsentation der Klassenliste</a> eines Elements zugreifen. Über die Funktionen <code>add</code> bzw. <code>remove</code> können Sie bestimmte CSS-Klassen hinzufügen oder entfernen. Das Element wird daraufhin unter Berücksichtigung der veränderten Attributwerte neu gerendert.
+                        </p>
+                    </span>
+                    <div class="playground">
+                        <span class="text-with-blanks">
+                            Hallo, <span class="placeholder name">NAME</span>. Dies ist ein erster Javascript-Test und stellt sicher, dass wir mit den grundsätzlichen Selektionsmechanismen in Javascript vertraut sind.
+                        </span>
+                    </div>
+                </div>
+                <div class="task">
+                    <h1>Events</h1>
+                    <span class="description">
+                        <p>
+                            Die unten angezeigten Boxen werden durch einzelne HTML-Elemente (<code>span</code>) dargestellt. Alle Elemente verfügen über die CSS-Klasse <code>box</code>. Über eine zusätzliche CSS-Klasse <code>white</code> bzw. <code>black</code> wird die Hintergrundfarbe der Box bestimmt. 
+                        </p>
+                        <p>
+                            Ergänzen Sie entsprechenden Javascript-Code, so dass bei einem Klick auf die Boxen die Hintergrundfarbe zwischen schwarz und weiß umgeschaltet wird. 
+                            Registrieren Sie für alle Boxen <i>Listener</i>, die eine <i>Callback</i>-Funktion aufrufen, wenn mit der Maus auf die Boxen geklickt wird. Verarbeiten Sie in der <i>Callback</i>-Funktion das <i>Event</i>-Objekt, dass automatisch als Parameter übergeben wird. In diesem finden Sie, als Eigenschaft <code>target</code> eine Referenz auf das Element, auf dem der <i>Event</i> ausgelöst wurde. Nutzen Sie die Funktionen der <i>Classlist</i> um die Hintergrundfarbe durch das Wechseln der CSS-Klassen zu realisieren.
+                        </p>
+                        <p>
+                            Machen Sie sich mit der Funktion <code>createElement</code> des <code>document</code>-Objekts <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement">vertraut</a>. Fügen Sie anschließend eine weitere Box mit roter Hintergrundfarbe ein. Eine entsprechende CSS-Klasse (<code>red</code>) existiert bereit. Die Boxen befinden sich in einem Elternelement das über die CSS-Klasse <code>boxes</code> ausgezeichnet ist.
+                        </p>
+                        </span>
+                        <div class="playground boxes">
+                        <span class="box white"></span>
+                        <span class="box black"></span>
+                        <span class="box white"></span>
+                        <span class="box black"></span>
+                        </div>
+                    </div>
+
+                </section>
+            </content>
+
+
+            <script src="resources/js/index.js"></script>
+
+        </body>
+
+        </html>

@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Effect Player</title>
+    <link rel="stylesheet" href="resources/icons/fontello/video-player-icons.css">
+    <link rel="stylesheet" href="resources/css/default.css">
+    <link rel="stylesheet" href="resources/css/video-player.css">
+</head>
+
+<body>
+    <header>
+        <h1><span class="icon"><i class="icon-app-icon"></i></span>Effect Player</h1>
+    </header>
+    <div class="decal"></div>
+    <content>
+        <div class="stage">
+        <div class="container video-container">
+            <video width="512" height="288" muted></video>
+            <span class="drag-and-drop-hint"><i class="icon-video"></i></span>
+            <span class="controls">
+                <span class="icon play"><i class="icon-play"></i></span>
+                <span class="icon pause"><i class="icon-pause"></i></span>
+                <span class="icon stop"><i class="icon-stop"></i></span>
+                <span class="icon loop"><i class="icon-loop"></i></span>
+            </span>
+        </div>
+        <div class="container canvas-container">
+            <canvas width="512" height="288"></canvas>
+            <span class="controls">
+                <span class="icon grayscale"><i class="icon-filter-grayscale"></i></span>
+                <span class="icon brighten"><i class="icon-filter-brighten"></i></span>
+                <span class="icon threshold"><i class="icon-filter-threshold"></i></span>
+            </span>
+        </div>
+        </div>
+    </content>
+
+    <script src="vendors/helpers/EventPublisher.js"></script>
+    <script src="vendors/helpers/DropTarget.js"></script>
+    <script src="resources/js/EffectPlayer.js"></script>
+    <script src="resources/js/CanvasFilter.js"></script>
+    <script src="resources/js/Controls.js"></script>
+    <script src="resources/js/VideoPlayer.js"></script>
+    <script src="resources/js/VideoControls.js"></script>
+    <script src="resources/js/VideoCanvas.js"></script>
+    <script src="resources/js/FilterControls.js"></script>
+    <script>
+        EffectPlayer.init();
+    </script>
+</body>
+
+</html>

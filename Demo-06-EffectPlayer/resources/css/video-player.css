@@ -1,0 +1,73 @@
+.hidden {
+	display: none ! important;
+}
+
+.stage {
+	width: 1048px;
+	margin: 0 auto;
+}
+
+.container {
+	position: relative;
+	display: block;
+	float: left;
+	width: 512px;
+	height: 288px;
+	border: 1px solid #000;
+	margin: 5px;
+	background-color: #1E1E1E;
+}
+
+.drag-and-drop-hint {
+	position: absolute;
+	display: block;
+	top: 0;
+	left: 0;
+	width: 512px;
+	height: 288px;
+	text-align: center;
+	font-size: 50px;
+	line-height: 288px;
+	color: #FFF;
+}
+
+.controls {
+	position: absolute;
+	display: block;
+	bottom: 0;
+	left: 0;
+	width: 512px;
+	height: 40px;
+}
+
+.canvas-container .controls {
+	top: 0;
+	right: 0;
+	text-align: right;
+	background-color: rgba(30,30,30,0.5);
+}
+
+.controls .icon {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	font-size: 25px;
+	line-height: 40px;
+}
+
+.controls .icon i {
+	color: #FFF;
+	opacity: 0.5;
+}
+
+.controls .icon i.active {
+	opacity: 1;
+}
+
+.controls .icon i:hover {
+	opacity: 1;
+	cursor: pointer;
+}
+
+

@@ -1,0 +1,148 @@
+@font-face {
+    font-family: "Rokkitt";
+    src: url("./fonts/Rokkitt/Rokkitt-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    margin: 0;
+    background: rgba(40,40,40,1);
+    font-family: 'Rokkitt', serif;
+    color: #FFF;
+}
+
+header {
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    top: 0px;
+    background: rgba(36,36,36,1);
+
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+}
+
+header h1 {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 1%;
+    margin: 0;
+    padding: 0;
+    line-height: 70px;
+    font-size: 1.5em;
+    text-align: left;
+}
+
+header #menu {
+    display: inline;
+    position: absolute;
+    right: 2%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    line-height: 70px;
+}
+
+header #menu li {
+    display: inline-block;
+    margin: 0 1em 0 0;
+}
+
+header #menu a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+header #menu a:hover {
+    color: rgb(236,250,114);
+}
+
+header #menu a.active {
+    color: rgb(250, 218, 114);
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 1%;
+    text-align: center;
+    color: #FFF;
+}
+
+.decal {
+    position: fixed;
+    width: 100%;
+    top: 70px;
+    height : 2px;
+    background-color: #000;
+    border-bottom: 1px solid #333;
+}
+
+content {
+    flex: 1;
+    min-height: 100%;
+    padding: 25px;
+    margin-top: 90px;
+}
+
+.machine {
+    display: block;
+    width: 400px;
+    height: 190px;
+    margin: 0 auto;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+}
+
+.reels {
+    display: block;
+    width: 380px;
+    height: 140px;
+    margin: 0 auto;
+    padding: 30px 10px;
+    background-color: transparent;
+}
+
+.reel {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    padding: 0px;
+    border-style: solid;
+    border-color: rgb(250, 218, 114);
+    border-width: 2px;
+    background-image: url("../images/slot-icons.png");
+    background-repeat: repeat-y;
+    list-style-type: none;
+}
+
+.button {
+    display: block;
+    width: 120px;
+    height: 120px;
+    margin: 50px auto;
+    border: solid 1px rgb(182, 53, 35);
+    border-radius: 50%;
+    background: rgb(203, 59, 39);
+    font-size: 40px;
+    color: #FFF;
+    line-height: 120px;
+    text-decoration: none;
+    text-align: center;
+}
+

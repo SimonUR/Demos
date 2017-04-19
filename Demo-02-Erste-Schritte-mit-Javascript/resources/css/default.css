@@ -1,0 +1,104 @@
+html {
+    background: #E2EAE2;
+    font-family: Arial, sans-serif;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	padding: 1em;
+	background-color: #A1D1A1;
+	border-style: solid;
+	border-width: 0 0 2px 0;
+	border-color: #BFCEBF;
+}
+
+header .title {
+	color: #FFF;
+}
+
+section {
+	padding: 1em;
+	width: 80%;
+	margin: 0 auto;
+}
+
+
+.quote-box {
+	padding: 1%;
+	border-radius: 0.5em;
+	background-color: #BFCFBF;
+	line-height: 1.3em;
+	color: #333;
+}
+
+.quote-author {
+	display: block;
+	text-align: right;
+	font-style: italic;
+}
+
+.quote-link {
+	text-decoration: underline;
+	color: #333;
+}
+
+.quote-link:hover {
+	color: #E2EAE2;
+}
+
+.task {
+	margin-top: 3em;
+}
+
+.task code.block {
+	display: block;
+	margin: 1em;
+}
+
+.task .playground {
+	display: block;
+	margin-top: 1em;
+	padding: 1%;
+	opacity: .9;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #A1D1A1;
+	background-color: #A1D1A1;
+	background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
+}
+
+.task .text-with-blanks {
+	padding: 0.5%;
+	background-color: #FFF;
+}
+
+.task .placeholder {
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bold;
+}
+
+.task .box {
+	display: block;
+	width: 4em;
+	height: 4em;
+	margin: 1em;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #333;
+}
+
+.black {
+	background-color: #000; 
+}
+
+.white {
+	background-color: #FFF;
+}
+
+.red {
+	background-color: #F00;
+}

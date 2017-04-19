@@ -1,0 +1,95 @@
+.sidebar {
+	display: inline-block;
+	width: 200px;
+	margin: 0;
+	vertical-align: top;
+}
+
+.box {
+	display: inline-block;
+	width: 130px;
+	margin-bottom: 30px;
+}
+
+.item {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	margin: 2.5px;
+	padding: 2.5px;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+	vertical-align: middle;
+	line-height: 50px;
+	text-align: center;
+	font-size: 25px;
+	background-color: #FFF;
+	color: #333;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.canvas {
+	display: inline-block;
+	margin: 0;
+	background-color: #FFF;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	vertical-align: top;
+}
+
+.item:hover {
+	cursor: pointer;
+}
+
+.tools .item.selected {
+	background-color: rgb(250, 218, 114);
+	border-color: rgb(250, 218, 114);
+}
+
+.tools .item:hover {
+	color: rgb(30,30,30);
+	background-color: rgb(236,250,114);
+	border-color: rgb(236,250,114);
+}
+
+.tools .tool-resizer {
+	margin-top: 20px;
+}
+
+.colors .preview {
+	display: inline-block;
+	width: 122.5px;
+	height: 122.5px;
+	margin: 2.5px;
+	background-color: #FFF;
+	border-radius: 5px;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.colors .item:hover {
+	opacity: 0.6;
+}
+
+.colors .black {
+	background-color: #000;
+}
+
+.colors .white {
+	background-color: #FFF;
+}
+
+.colors .red {
+	background-color: #F00;
+}
+
+.colors .green {
+	background-color: #080;
+}
+
+.colors .blue {
+	background-color: #00F;
+}
+
+.colors .yellow {
+	background-color: #FF0;
+}
