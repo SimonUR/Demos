@@ -1,4 +1,4 @@
-![Cover für diese Aufgabe](/docs/cover.png)
+![Cover für diese Aufgabe](docs/cover.png)
 
 # Todo-Liste: Daten im Browser persistieren
 
@@ -32,7 +32,7 @@ Um die Persistenz-Schicht möglichst modular zu gestalten und von der übrigen P
 3. Versuchen Sie beim Anwendungsstart einen gespeicherten Zustand zu laden. Überführen Sie die geladenen Daten in nutzbare Javascript-Strukturen und befüllen Sie Ihr *Model* mit diesen Informationen. Wenn keine Daten gespeichert wurden, stellen Sie einen - leeren - initialen Zustand im *Model* bereit.
 
 ## Aufbau der Anwendung
-![Screenshot der Anwendung](/docs/screenshot.png)
+![Screenshot der Anwendung](docs/screenshot.png)
 
 Das *User Interface* der Anwendung besteht aus einem Eingabefeld zur Erstellung neuer Aufgaben sowie einer Liste zur Darstellung der bereits erstellten Aufgaben. Die Liste ermöglicht es dem Nutzer den Zustand einzelner Aufgaben zu ändern.
 

@@ -1,4 +1,4 @@
-![Cover für diese Aufgabe](/docs/cover.png)
+![Cover für diese Aufgabe](docs/cover.png)
 
 # Image-Processing mit dem Video- und Canvas-Element
 
@@ -6,7 +6,7 @@
 
 ## Übersicht
 
-![Screenshot der Anwendung](/docs/screenshot-complete.png)
+![Screenshot der Anwendung](docs/screenshot-complete.png)
 
 In diesem Beispiel lernen Sie den grundsätzlichen Umgang mit dem `video`-Element kennen. Darüber hinaus thematisierte diese Aufgabe die Möglichkeit Video- und Canvas-Funktionalitäten gemeinsam zu nutzen und durch das Zusammenspiel dieser Komponenten Echtzeiteffekte für die Video-Wiedergabe zu implementieren. Ziel ist es dabei, eine Webanwendung zu entwickeln die es dem Nutzer ermöglicht kompatible Video-Dateien abzuspielen und dabei die Wiedergabe durch visuelle Effekte (Graustufen, Helligkeit und Schwellenwert-Reduktion) zu verändern. Die Video-Dateien werden per *Drag & Drop* in die Anwendung importiert und dort in einem Video-Container wiedergegeben. Der Nutzer kann diesen Player durch entsprechende Schaltflächen steuern und das Video dadurch pausieren und stoppen. Regelmäßig (*24fps*) wird das aktuelle Videobild auf einem Canvas übertragen. Zusätzlich hat der Benutzer die Möglichkeit, einen der oben genannten Effekte zu aktivieren. Dieser wird dann auf die im Canvas angezeigten Video-Frames angewendet.
 

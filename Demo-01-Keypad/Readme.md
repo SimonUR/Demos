@@ -1,4 +1,4 @@
-![Titelseite für Übung: Keypad](/docs/images/cover.png)
+![Titelseite für Übung: Keypad](docs/images/cover.png)
 
 In dieser Demo lernen Sie die grundlegenden Schritte kennen um eine einfache Javascript-Anwendung für den Browser zu erstellen. Dieses Tutorial ersetzt keine eigene Beschäftigung mit den Grundlagen zu HTML, CSS und Javascript. Sollten Sie auf diesen Gebieten noch Bedarf an weiteren Materialien zum Selbststudium haben, finden Sie entsprechenden Links im [GRIPS-Kurs](https://elearning.uni-regensburg.de/course/view.php?id=26759). 
 
@@ -9,7 +9,7 @@ In dieser Demo erstellt wir ein interaktives *Keypad*, mit dem der Nutzer Zahlen
 * Zusätzlich stehen dem Nutzer 12 Tasten zur Verfügung mit denen er die Ziffern 0 bis 9 eingeben kann. Über die Taste `*` kann der Benutzer die aktuelle Eingabe aus dem Display löschen. Über die Taste `#` bestätigt er die Eingabe, was zur Überprüfung des Codes führt. 
 * Wird der korrekte Code eingeben, erscheint in der *Konsole* die Ausgabe `Code Accepted!`, andernfalls wird `Invalid Code` ausgegeben. In beiden Fällen wird anschließend das Display zurückgesetzt.
 
-![Screenshot des Keypads](/docs/images/keypad.png)
+![Screenshot des Keypads](docs/images/keypad.png)
 
 Die Beschreibung ist in sieben Abschnitte unterteilt. In jedem dieser Schritte wird das Projekt erweitert um schließlich den oben beschriebenen Funktionsumfang zu realisieren. Sie können die verschiedenen Schritte nachvollziehen (und nach-programmieren) in dem Sie die jeweils passenden *Commit* auschecken und sich dadurch jeweils den zum aktuellen Schritt zugehörigen Stand des Codes anschauen.
 
@@ -46,7 +46,7 @@ In der HTML-Datei wird der grundlegende Code für die Strukturierung der Anwendu
 
 Da aktuell noch keine CSS-Regeln definiert werden, wird der eben erstellte HTML-Inhalt ohne spezifische Gestaltung angezeigt:
 
-![Screenshot der Anwendung nach diesem Schritt](/docs/images/step1.png)
+![Screenshot der Anwendung nach diesem Schritt](docs/images/step1.png)
 
 ## Schritt 2: Einfaches CSS-Styling für die Website hinzufügen.
 [Stand des Repositories nach diesem Schritt](https://github.com/Multimedia-Engineering-Regensburg/Demo-01-Keypad/tree/02d2e426cd633b8695c22fe40bb98c5ce71517cb)
@@ -57,7 +57,7 @@ In der CSS-Datei werden Regeln für das `html`, `body`-, `header`- und das `cont
 
 Nach diesem Schritt wird die Anwendung im Browser wie folgt dargestellt:
 
-![Screenshot der Anwendung nach diesem Schritt](/docs/images/step2.png) 
+![Screenshot der Anwendung nach diesem Schritt](docs/images/step2.png) 
 
 ## Schritt 3: HTML-Struktur für das Keypad hinzufügen.
 [Stand des Repositories nach diesem Schritt](https://github.com/Multimedia-Engineering-Regensburg/Demo-01-Keypad/tree/ce168536bcdeeb91b372fee37c011578075f337c)
@@ -72,14 +72,14 @@ Für die Darstellung der Inhalte werden die folgenden HTML-Elemente genutzt:
 
 * ```<span cass="key"></span>```: Jede Taste wird als eigenständiges Element abgebildet. Der Taste wird zur Darstellung als Inhalt des Elements und zur internen Verwendung innerhalb der Anwendung als `data-value` gespeichert.
 
-![Screenshot der Anwendung nach diesem Schritt](/docs/images/step3.png) 
+![Screenshot der Anwendung nach diesem Schritt](docs/images/step3.png) 
 
 ## Schritt 4: CSS-Styling für Keypad hinzufügen.
 [Stand des Repositories nach diesem Schritt](https://github.com/Multimedia-Engineering-Regensburg/Demo-01-Keypad/tree/ad837714012bf552cbf7df985e1f5155e04cda58)
 
 Die im vorherigen Schritt angelegte Struktur muss um CSS-Regeln ergänzt werden, um die Darstellung des *Keypads* zu erreichen. Dazu werden für die verschiedenen Bestandteile (Container, Display, Tasten) unterschiedliche Regeln erstellt, die durch das Setzen der Position, Größe, Farbe und Schrifteinstellungen das gewünschte Endergebnis erzielen. 
 
-![Screenshot der Anwendung nach diesem Schritt](/docs/images/step4.png) 
+![Screenshot der Anwendung nach diesem Schritt](docs/images/step4.png) 
 
 ## Schritt 5: Javascript-Datei in der HTML-Datei referenzieren.
 [Stand des Repositories nach diesem Schritt](https://github.com/Multimedia-Engineering-Regensburg/Demo-01-Keypad/tree/05075d3ba1665ed417876f5c6af33ba886216cd4)
