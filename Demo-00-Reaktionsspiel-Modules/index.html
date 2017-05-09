@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>React</title>
+    <link rel="stylesheet" href="resources/css/styles.css">
+</head>
+
+<body>
+    <header>
+    	<span class="title">React: A Javascript Game</span>
+        <span class="points">0</span>
+    </header>
+    <div class="info">press <span class="key">SPACE</span> when one of the lights turns on</div>
+    <div class="result">...</div>
+    <div class="lights">
+        <span class="light off"></span>
+        <span class="light off"></span>
+        <span class="light off"></span>
+        <span class="light off"></span>
+        <span class="light off"></span>
+    </div>
+</body>
+<script type="text/javascript" src="resources/js/ReactionGame.js"></script>
+<script type="text/javascript" src="resources/js/ReactionGameView.js"></script>
+<script type="text/javascript" src="resources/js/ReactionGameModel.js"></script>
+<script type="text/javascript">
+    ReactionGame.init();
+</script>
+
+
+</html>
