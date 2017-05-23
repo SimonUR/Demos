@@ -1,17 +1,17 @@
 /* eslint-env browser */
-/* global request */
 
 var MensaApp = MensaApp || {};
-MensaApp.MessageGenerator = (function() {
+MensaApp.MessageBuilder = function() {
   "use strict";
 
-  const MESSAGE_TEMPLATE =
+  const EMPTY_MENU_MESSAGE = "Heute gibt es in der Uni Mensa NICHTS.",
+    MESSAGE_TEMPLATE =
     "Heute gibt es in der Uni Mensa {{MAIN_DISHES}}. Dazu empfiehlt der Küchenchef {{SIDE_DISHES}}. Wie wäre es danach mit {{DESSERTS}}?",
     MAIN_DISH_TEMPLATE = "<span class='main-dish'>{{name}}</span>",
     SIDE_DISH_TEMPLATE = "<span class='side-dish'>{{name}}</span>",
     DESSERT_TEMPLATE = "<span class='dessert'>{{name}}</span>",
     JOIN_STRING = ", ",
-    LAST_ELEMENT_JOIN_STRING = " und ",
+    LAST_ELEMENT_JOIN_STRING = " und ",
     MAIN_DISH_PREFIX = "HG",
     SIDE_DISH_PREFIX = "B",
     DESSERT_PREFIX = "N";
@@ -33,6 +33,10 @@ MensaApp.MessageGenerator = (function() {
       sideDishes = [],
       desserts = [],
       message = MESSAGE_TEMPLATE;
+
+    if (!menu || menu.length === 0) {
+      return EMPTY_MENU_MESSAGE;
+    }
     for (let i = 0; i < menu.length; i++) {
       let entry = menu[i],
         target,
@@ -63,4 +67,4 @@ MensaApp.MessageGenerator = (function() {
 
   that.createMenuMessage = createMenuMessage;
   return that;
-}());
+};

@@ -1,14 +1,13 @@
 /* eslint-env browser */
-/* global request */
+/* global request, MMEventTarget */
 
 var MensaApp = MensaApp || {};
-MensaApp.DataProvider = (function() {
+MensaApp.DataProvider = function() {
   "use strict";
 
-  const WEEKDAYS = ["mo", "di", "mi", "do", "fr", ],
-    API_URL = "http://132.199.139.24:9001/mensa/uni/{{day}}";
-  var that = {},
-    data;
+  const API_URL = "http://132.199.139.24:9001/mensa/uni/{{day}}";
+  var that = new MMEventTarget(),
+    data = {};
 
   function checkForCompleteData() {
     if (!data.hasOwnProperty("fr")) {
@@ -29,37 +28,37 @@ MensaApp.DataProvider = (function() {
     return true;
   }
 
-  function onNewDataAvailable(weekday, callback, dataForDay) {
+  function onNewDataAvailable(day, menuData) {
     var completeDataIsAvailable = false;
-    data[weekday] = JSON.parse(dataForDay);
+    data[day.id] = JSON.parse(menuData);
     completeDataIsAvailable = checkForCompleteData();
     if (completeDataIsAvailable) {
-      callback();
+      that.dispatchEvent({
+        type: "dataAvailable",
+        data: {
+          getMenuForDay: getMenuForDay,
+        },
+      });
     }
   }
 
-  function getMenuForWeekday(weekday) {
-    return data[weekday];
+  function getMenuForDay(day) {
+    return data[day.id];
   }
 
-  function update(callback) {
+  function update() {
     data = {};
-    for (let i = 0; i < WEEKDAYS.length; i++) {
-      let day = WEEKDAYS[i],
-        options = {
-          url: API_URL.replace("{{day}}", day),
-          success: onNewDataAvailable.bind(this, day, callback),
+    for (let day in MensaApp.WEEKDAYS) {
+      if (MensaApp.WEEKDAYS.hasOwnProperty(day)) {
+        let options = {
+          url: API_URL.replace("{{day}}", MensaApp.WEEKDAYS[day].id),
+          success: onNewDataAvailable.bind(this, MensaApp.WEEKDAYS[day]),
         };
-      request.get(options);
+        request(options);
+      }
     }
-
   }
 
   that.update = update;
-  that.getMenuForMonday = getMenuForWeekday.bind(this, "mo");
-  that.getMenuForTuesday = getMenuForWeekday.bind(this, "di");
-  that.getMenuForWednesday = getMenuForWeekday.bind(this, "mi");
-  that.getMenuForThursday = getMenuForWeekday.bind(this, "do");
-  that.getMenuForFriday = getMenuForWeekday.bind(this, "fr");
   return that;
-}());
+};

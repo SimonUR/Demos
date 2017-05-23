@@ -4,71 +4,40 @@ var MensaApp = MensaApp || {};
 MensaApp = (function() {
   "use strict";
 
-  const WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", ];
   var that = {},
-    messageView;
+    dataProvider,
+    menu,
+    view;
 
-  function onDaySelected(weekday) {
-    showDataForWeekday(weekday);
+  function onDaySelected(event) {
+    let daysMenu = menu.getMenuForDay(event.data);
+    view.setMenu(daysMenu);
   }
 
-  function selectToday() {
-    var dayIndex = new Date().getDay(),
-      weekday;
-    if (dayIndex > 0 && dayIndex < 6) {
-      weekday = WEEKDAYS[dayIndex - 1];
-    } else {
-      weekday = WEEKDAYS[0];
-    }
-    MensaApp.DaySelector.selectDayByName(weekday);
-  }
-
-  function showDataForWeekday(weekday) {
-    var data,
-      message;
-    switch (weekday) {
-      case "monday":
-        data = MensaApp.DataProvider.getMenuForMonday();
-        break;
-      case "tuesday":
-        data = MensaApp.DataProvider.getMenuForTuesday();
-        break;
-      case "wednesday":
-        data = MensaApp.DataProvider.getMenuForWednesday();
-        break;
-      case "thursday":
-        data = MensaApp.DataProvider.getMenuForThursday();
-        break;
-      case "friday":
-        data = MensaApp.DataProvider.getMenuForFriday();
-        break;
-      default:
-        break;
-    }
-    if (data) {
-      message = MensaApp.MessageGenerator.createMenuMessage(data);
-      messageView.innerHTML = message;
-    }
-  }
-
-  function onProviderUpdated() {
-    selectToday();
+  function onDataAvailable(event) {
+    menu = event.data;
+    view.selectDay(MensaApp.WEEKDAYS.Monday);
   }
 
   function init() {
     initUserInterface();
     initDataProvider();
+    dataProvider.update();
   }
 
   function initUserInterface() {
-    var daySelector = document.querySelector(".week-day-selectors");
-    messageView = document.querySelector(".todays-menu .text");
-    MensaApp.DaySelector.init(daySelector);
-    MensaApp.DaySelector.setOnDaySelectedListener(onDaySelected);
+    let messageBuilder = new MensaApp.MessageBuilder();
+    view = new MensaApp.ViewController({
+      messageBuilder: messageBuilder,
+      messageView: document.querySelector(".todays-menu .text"),
+      selectorView: document.querySelector(".week-day-selectors"),
+    }).init();
+    view.addEventListener("daySelected", onDaySelected);
   }
 
   function initDataProvider() {
-    MensaApp.DataProvider.update(onProviderUpdated);
+    dataProvider = new MensaApp.DataProvider();
+    dataProvider.addEventListener("dataAvailable", onDataAvailable);
   }
 
   that.init = init;

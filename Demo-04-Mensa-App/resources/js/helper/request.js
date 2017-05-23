@@ -1,56 +1,75 @@
 /* eslint-env browser */
-/* global request */
 
 var request = request || (function() {
   "use strict";
 
-  const READY_STATE_UNITIALIZED = 0,
-    READY_STATE_CONNECTED = 1,
-    READY_STATE_SERVER_RECEIVED_REQUEST = 2,
-    READY_STATE_SERVER_PROCESSING_REQUEST = 3,
-    READY_STATE_RESPONSE_READY = 4,
-    HTTP_CODE_OK = 200,
-    HTTP_CODE_FORBIDDEN = 403,
-    HTTP_CODE_NOT_FOUND = 404;
-  var that = {};
+  const READY_STATES = {
+      UNITIALIZED: 0,
+      CONNECTED: 1,
+      SERVER_RECEIVED_REQUEST: 2,
+      SERVER_PROCESSING_REQUEST: 3,
+      RESPONSE_READY: 4,
+    },
+    HTTP_CODES = {
+      OK_200: 200,
+      FORBIDDEN_403: 403,
+      NOT_FOUND_404: 404,
+    },
+    DEFAULTS = {
+      METHOD: "GET",
+    };
 
   function foo() {
     return false;
   }
 
-  function createAsyncXMLHttpRequest(url, method, onSuccess, onError) {
-    var requestMethod = method || "GET",
-      success = onSuccess || foo,
-      error = onError || foo,
-      xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState === READY_STATE_RESPONSE_READY) {
-        switch (this.status) {
-          case HTTP_CODE_OK:
-            success(this.responseText);
-            break;
-          case HTTP_CODE_FORBIDDEN:
-            error("HTTP Error 403: Access forbidden.");
-            break;
-          case HTTP_CODE_NOT_FOUND:
-            error("HTTP Error 404: Document not found.");
-            break;
-          default:
-            error("Unknown Error");
-            break;
-        }
-      }
-    };
-    xmlhttp.open(requestMethod, url, true);
-    return xmlhttp;
+  function onResponseReady(response, onSuccess, onError) {
+    var success = onSuccess || foo,
+      error = onError || foo;
+    switch (response.status) {
+      case HTTP_CODES.OK_200:
+        success(response.responseText);
+        break;
+      case HTTP_CODES.FORBIDDEN_403:
+        error("HTTP Error 403: Access forbidden.");
+        break;
+      case HTTP_CODES.NOT_FOUND_404:
+        error("HTTP Error 404: Document not found.");
+        break;
+      default:
+        error("Unknown Error");
+        break;
+    }
   }
 
-  function requestDocument(method, options) {
-    var request = createAsyncXMLHttpRequest(options.url, method, options.success,
+  function createXMLHttpRequest(onSuccess, onError) {
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function() {
+      switch (this.readyState) {
+        case READY_STATES.UNITIALIZED:
+          break;
+        case READY_STATES.CONNECTED:
+          break;
+        case READY_STATES.SERVER_RECEIVED_REQUEST:
+          break;
+        case READY_STATES.SERVER_PROCESSING_REQUEST:
+          break;
+        case READY_STATES.RESPONSE_READY:
+          onResponseReady(this, onSuccess, onError);
+          break;
+        default:
+          break;
+      }
+    };
+    return httpRequest;
+  }
+
+  function request(options) {
+    var request = createXMLHttpRequest(options.success,
       options.error);
+    request.open(DEFAULTS.METHOD, options.url, true);
     request.send();
   }
 
-  that.get = requestDocument.bind(this, "GET");
-  return that;
+  return request;
 }());
