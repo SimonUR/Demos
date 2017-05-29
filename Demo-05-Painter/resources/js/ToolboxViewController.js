@@ -42,9 +42,9 @@ Painter.ToolboxViewController = function(toolboxNode) {
   }
 
   function init() {
-    var index, toolboxItems = toolboxNode.querySelectorAll(".item");
+    var toolboxItems = toolboxNode.querySelectorAll(".item");
     toolbox = toolboxNode;
-    for (index = 0; index < toolboxItems.length; index++) {
+    for (let index = 0; index < toolboxItems.length; index++) {
       toolboxItems[index].addEventListener("click", onItemClicked);
     }
     return that;

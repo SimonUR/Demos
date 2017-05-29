@@ -49,8 +49,8 @@ var Painter = (function() {
   }
 
   function initCanvas() {
-    canvas = new Painter.CanvasController();
-    canvas.init(document.querySelector(".canvas"));
+    var canvasEl = document.querySelector(".canvas");
+    canvas = new Painter.CanvasController(canvasEl);
   }
 
   function initPalette() {

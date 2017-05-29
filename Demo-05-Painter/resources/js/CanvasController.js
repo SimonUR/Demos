@@ -1,6 +1,6 @@
 /* eslint-env browser  */
 var Painter = Painter || {};
-Painter.CanvasController = function() {
+Painter.CanvasController = function(canvasNode) {
   "use strict";
 
   var that = {},
@@ -150,13 +150,14 @@ Painter.CanvasController = function() {
     options = newOptions;
   }
 
-  function init(canvasNode) {
+  function init() {
     canvas = canvasNode;
     context = canvas.getContext("2d");
     canvas.addEventListener("mousemove", onMouseMovedInCanvas);
     canvas.addEventListener("mouseleave", onMouseLeftCanvas);
     canvas.addEventListener("mousedown", onMouseDownInCanvas);
     canvas.addEventListener("mouseup", onMouseUpInCanvas);
+    return that;
   }
 
   that.init = init;
@@ -164,5 +165,5 @@ Painter.CanvasController = function() {
   that.getImage = getDataUrl;
   that.clear = clear;
   that.undo = undo;
-  return that;
+  return init();
 };

@@ -30,10 +30,10 @@ Painter.PaletteViewController = function(paletteNode) {
   }
 
   function init() {
-    var index, colors = paletteNode.querySelectorAll(".item");
+    var colors = paletteNode.querySelectorAll(".item");
     palette = paletteNode;
     currentColor = palette.querySelector(".preview");
-    for (index = 0; index < colors.length; index++) {
+    for (let index = 0; index < colors.length; index++) {
       colors[index].addEventListener("click", onColorClicked);
     }
     return that;
