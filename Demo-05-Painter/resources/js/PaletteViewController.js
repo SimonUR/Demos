@@ -1,11 +1,11 @@
 /* eslint-env browser  */
-/* global EventPublisher */
+/* global MMEventTarget */
 
 var Painter = Painter || {};
-Painter.PaletteView = function() {
+Painter.PaletteViewController = function(paletteNode) {
   "use strict";
 
-  var that = new EventPublisher(),
+  var that = new MMEventTarget(),
     palette,
     currentColor;
 
@@ -23,19 +23,22 @@ Painter.PaletteView = function() {
     currentColor.classList.remove("black", "white", "red", "green", "blue",
       "yellow");
     currentColor.classList.add(color);
-    that.notifyAll("colorSelected", color);
+    that.dispatchEvent({
+      type: "colorSelected",
+      data: color,
+    });
   }
 
-  function init(paletteNode) {
+  function init() {
     var index, colors = paletteNode.querySelectorAll(".item");
     palette = paletteNode;
     currentColor = palette.querySelector(".preview");
     for (index = 0; index < colors.length; index++) {
       colors[index].addEventListener("click", onColorClicked);
     }
+    return that;
   }
 
-  that.init = init;
   that.setDefault = setDefault;
-  return that;
+  return init();
 };

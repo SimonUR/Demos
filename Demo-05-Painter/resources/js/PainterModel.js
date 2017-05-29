@@ -1,25 +1,32 @@
 /* eslint-env browser  */
-/* global EventPublisher */
+/* global MMEventTarget */
 
 var Painter = Painter || {};
 Painter.PainterModel = function() {
   "use strict";
 
-  var that = new EventPublisher(),
-    CIRCLE_RADIUS = 15,
+  const CIRCLE_RADIUS = 15,
     SQUARE_WIDTH = 30,
-    LINE_WEIGHT = 2,
+    LINE_WEIGHT = 2;
+
+  var that = new MMEventTarget(),
     color,
     tool;
 
   function setColor(newColor) {
     color = newColor;
-    that.notifyAll("optionsChanged", getState());
+    that.dispatchEvent({
+      type: "optionsChanged",
+      data: getState(),
+    });
   }
 
   function setTool(newTool) {
     tool = newTool;
-    that.notifyAll("optionsChanged", getState());
+    that.dispatchEvent({
+      type: "optionsChanged",
+      data: getState(),
+    });
   }
 
   function getState() {

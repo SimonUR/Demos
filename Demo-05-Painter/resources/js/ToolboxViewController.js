@@ -1,11 +1,11 @@
 /* eslint-env browser  */
-/* global EventPublisher */
+/* global MMEventTarget */
 
 var Painter = Painter || {};
-Painter.ToolboxView = function() {
+Painter.ToolboxViewController = function(toolboxNode) {
   "use strict";
 
-  var that = new EventPublisher(),
+  var that = new MMEventTarget(),
     toolbox;
 
   function setDefault() {
@@ -27,21 +27,29 @@ Painter.ToolboxView = function() {
     element.classList.add("selected");
     value = element.getAttribute("value");
     if (element.classList.contains("tool")) {
-      that.notifyAll("toolSelected", value);
+      that.dispatchEvent({
+        type: "toolSelected",
+        data: value,
+      });
+
     } else if (element.classList.contains("action")) {
-      that.notifyAll("actionSelected", value);
+
+      that.dispatchEvent({
+        type: "actionSelected",
+        data: value,
+      });
     }
   }
 
-  function init(toolboxNode) {
+  function init() {
     var index, toolboxItems = toolboxNode.querySelectorAll(".item");
     toolbox = toolboxNode;
     for (index = 0; index < toolboxItems.length; index++) {
       toolboxItems[index].addEventListener("click", onItemClicked);
     }
+    return that;
   }
 
-  that.init = init;
   that.setDefault = setDefault;
-  return that;
+  return init();
 };

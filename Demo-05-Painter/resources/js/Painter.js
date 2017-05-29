@@ -2,7 +2,8 @@
 var Painter = (function() {
   "use strict";
 
-  var model,
+  var that = {}, 
+    model,
     canvas,
     toolbox,
     palette;
@@ -53,21 +54,20 @@ var Painter = (function() {
   }
 
   function initPalette() {
-    palette = new Painter.PaletteView();
-    palette.init(document.querySelector(".colors"));
+    var colorsEl = document.querySelector(".colors");
+    palette = new Painter.PaletteViewController(colorsEl);
     palette.addEventListener("colorSelected", onColorSelected);
     palette.setDefault();
   }
 
   function initToolbox() {
-    toolbox = new Painter.ToolboxView();
-    toolbox.init(document.querySelector(".tools"));
+    var toolsEl = document.querySelector(".tools");
+    toolbox = new Painter.ToolboxViewController(toolsEl);
     toolbox.addEventListener("toolSelected", onToolSelected);
     toolbox.addEventListener("actionSelected", onActionSelected);
     toolbox.setDefault();
   }
 
-  return {
-    init: init,
-  };
+  that.init = init;
+  return that;
 }());
