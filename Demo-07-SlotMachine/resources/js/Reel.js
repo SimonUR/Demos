@@ -14,7 +14,7 @@ SlotMachineGame.Reel = function(reelNode) {
     SOUND_PLAYBACK_RATE_SLOW = 1,
     SLOT_VALUES = ["lemon", "melon", "plum", "cherry", "seven",];
 
-  var that = new EventPublisher(),
+  var that = new MMEventTarget(),
     sound = new Audio("./resources/sounds/clock-ticking.mp3"),
     currentValue = "stopped";
 
@@ -101,7 +101,10 @@ SlotMachineGame.Reel = function(reelNode) {
   function stopReelAtValue(value) {
     clearNodeClasses();
     reelNode.classList.add("move-finish", "move-to-" + value);
-    that.notifyAll("reelStopped", that);
+    that.dispatchEvent({
+      type: "reelStopped", 
+      data: that,
+    });
   }
 
   that.start = startReel;
