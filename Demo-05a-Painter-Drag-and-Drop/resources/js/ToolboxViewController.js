@@ -1,23 +1,16 @@
-/* eslint-env browser */
-/* global EventPublisher */
+/* eslint-env browser  */
+/* global MMEventTarget */
 
 var Painter = Painter || {};
-Painter.ToolboxView = function() {
+Painter.ToolboxViewController = function(toolboxNode) {
   "use strict";
 
-  var that = new EventPublisher(),
-    toolbox,
-    resizer;
+  var that = new MMEventTarget(),
+    toolbox;
 
   function setDefault() {
     var defaultElement = toolbox.querySelector(".selected");
     selectElement(defaultElement);
-    changeToolSize(5);
-  }
-
-  function onResizerChanged(event) {
-    var size = event.target.value;
-    changeToolSize(size);
   }
 
   function onItemClicked(event) {
@@ -28,9 +21,12 @@ Painter.ToolboxView = function() {
     selectElement(target);
   }
 
-  function changeToolSize(size) {
-    resizer.value = size;
-    that.notifyAll("toolSizeChanged", size);
+  function onSizeOptionChanged(event) {
+    var value = event.target.valueAsNumber;
+    that.dispatchEvent({
+      type: "sizeChanged",
+      data: value,
+    });
   }
 
   function selectElement(element) {
@@ -39,23 +35,32 @@ Painter.ToolboxView = function() {
     element.classList.add("selected");
     value = element.getAttribute("value");
     if (element.classList.contains("tool")) {
-      that.notifyAll("toolSelected", value);
+      that.dispatchEvent({
+        type: "toolSelected",
+        data: value,
+      });
+
     } else if (element.classList.contains("action")) {
-      that.notifyAll("actionSelected", value);
+
+      that.dispatchEvent({
+        type: "actionSelected",
+        data: value,
+      });
     }
   }
 
-  function init(toolboxNode, resizerNode) {
-    var index, toolboxItems = toolboxNode.querySelectorAll(".item");
+  function init() {
+    var toolboxItems = toolboxNode.querySelectorAll(".item:not(.size)");
     toolbox = toolboxNode;
-    resizer = resizerNode;
-    for (index = 0; index < toolboxItems.length; index++) {
+    for (let index = 0; index < toolboxItems.length; index++) {
       toolboxItems[index].addEventListener("click", onItemClicked);
     }
-    resizer.addEventListener("change", onResizerChanged);
+    toolbox.querySelector("input.size").addEventListener("change",
+      onSizeOptionChanged);
+
+    return that;
   }
 
-  that.init = init;
   that.setDefault = setDefault;
-  return that;
+  return init();
 };

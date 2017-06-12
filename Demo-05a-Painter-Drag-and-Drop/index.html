@@ -6,13 +6,12 @@
     <title>Painter</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="resources/css/default.css">
-    <link rel="stylesheet" href="resources/css/painter.css">
-    <link rel="stylesheet" href="resources/css/drag-target.css">
+    <link rel="stylesheet" href="resources/css/app.css">
 </head>
 
 <body>
     <header>
-        <h1>Painter</h1>
+        <h1>Painter: <span class="subtitle">Now with Drag and Drop</span></h1>
         <ul id="menu">
         </ul>
     </header>
@@ -27,7 +26,7 @@
                 <span class="item action undo" value="undo"><i class="fa fa-undo"></i></span>
                 <span class="item action new" value="new"><i class="fa fa-file-image-o"></i></span>
                 <span class="item action save" value="save"><i class="fa fa-floppy-o"></i></span>
-                <input class="tool-resizer" type="range" min="1" max="100" step="1">
+                <span class="item large option size" value="size"><input type="range" class="size" min="0.1" max="1" step="0.1" value="0.6"></i></span>
             </div>
             <div class="colors box">
                 <span class="item color black" value="black"></span>
@@ -40,15 +39,14 @@
             </div>
         </div>
         <canvas class="canvas" width="800" height="800"></canvas>
-        <div id="drop-target-1" class="drop-target"><i class="fa fa-file-image-o" aria-hidden="true"></i></div>
     </content>
-    <script src="resources/js/EventPublisher.js"></script>
-    <script src="resources/js/DropTarget.js"></script>
+    <script src="resources/js/helper/events.js"></script>
     <script src="resources/js/Painter.js"></script>
     <script src="resources/js/PainterModel.js"></script>
-    <script src="resources/js/PaletteView.js"></script>
-    <script src="resources/js/ToolboxView.js"></script>
+    <script src="resources/js/PaletteViewController.js"></script>
+    <script src="resources/js/ToolboxViewController.js"></script>
     <script src="resources/js/CanvasController.js"></script>
+    <script src="resources/js/ImageDropZone.js"></script>
     <script>
         Painter.init();
     </script>

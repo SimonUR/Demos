@@ -1,0 +1,114 @@
+.sidebar {
+	display: inline-block;
+	width: 130px;
+	padding: 10px;
+}
+
+.box {
+	display: inline-block;
+	width: 130px;
+	margin-bottom: 50px;
+}
+
+.canvas {
+	display: inline-block;
+	margin: 0;
+	background-color: #FFF;
+	vertical-align: top;
+	border-style: solid;
+	border-width: 2.5px;
+	border-color: rgb(40,40,40);
+}
+
+.canvas.highlighted {
+	border-color: rgb(250, 218, 114);
+	background-color: rgba(220,220,220,0.5);
+}
+
+.item {
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	margin: 2px;
+	border-radius: 2.5px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #333;
+	background-color: #333;
+	vertical-align: middle;
+	line-height: 48px;
+	text-align: center;
+	font-size: 25px;
+	color: #FFF;
+}
+
+.item.large {
+	width: 104px;
+}
+
+.item.size {
+	background-color: #F1F1F1;
+	border-style: none;
+}
+
+.item.size input.size {
+	width: 104px;
+	outline: none;
+}
+
+.item:hover {
+	cursor: pointer;
+}
+
+.tools .item.selected {
+	color: #333;
+	background-color: rgb(250, 218, 114);
+}
+
+.tools .item:hover {
+	color: #333;
+	background-color: rgb(250, 218, 114);
+}
+
+.tools .item.size:hover {
+	background-color: #F1F1F1;
+	color: #FFF;
+}
+
+
+
+.colors .preview {
+	display: inline-block;
+	width: 110px;
+	height: 110px;
+	margin: 2.5px;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 2.5px;
+	border-color: #333;
+	background-color: #FFF;
+}
+
+.colors .black {
+	background-color: #000;
+}
+
+.colors .white {
+	background-color: #FFF;
+}
+
+.colors .red {
+	background-color: #F00;
+}
+
+.colors .green {
+	background-color: #080;
+}
+
+.colors .blue {
+	background-color: #00F;
+}
+
+.colors .yellow {
+	background-color: #FF0;
+}

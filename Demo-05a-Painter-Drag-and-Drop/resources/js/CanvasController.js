@@ -1,7 +1,6 @@
 /* eslint-env browser  */
-
 var Painter = Painter || {};
-Painter.CanvasController = function() {
+Painter.CanvasController = function(canvasNode) {
   "use strict";
 
   var that = {},
@@ -32,10 +31,8 @@ Painter.CanvasController = function() {
     image.src = state;
   }
 
-  function drawImage(img, x, y, width, height) {
-    var w = width | img.width,
-      h = height | img.height;
-    context.drawImage(img, x, y, w, h);
+  function drawImage(img, x, y) {
+    context.drawImage(img, x, y, img.width, img.height);
   }
 
   function drawLine(start, end) {
@@ -134,6 +131,49 @@ Painter.CanvasController = function() {
     updateMouseInformation(event.offsetX, event.offsetY, false);
   }
 
+  function resizeImageToCanvas(img) {
+    var ratio, orientation, newWidth, newHeight;
+    orientation = img.width > img.height ? "landscape" : "portrait";
+    if (orientation === "landscape") {
+      if (img.width > canvas.width) {
+        ratio = canvas.width / img.width;
+        newWidth = canvas.width;
+        newHeight = Math.floor(canvas.height * ratio);
+      }
+    } else {
+      if (img.height > canvas.height) {
+        ratio = canvas.height / img.height;
+        newWidth = Math.floor(canvas.width * ratio);
+        newHeight = canvas.height * ratio;
+      }
+    }
+    img.width = newWidth;
+    img.height = newHeight;
+    return img;
+  }
+
+  function resizeAndCenterImage(img) {
+    var x, y, tmpImg;
+    tmpImg = resizeImageToCanvas(img);
+    x = (canvas.width - tmpImg.width) / 2;
+    y = (canvas.height - tmpImg.height) / 2;
+    drawImage(tmpImg, x, y);
+  }
+
+  function setBackgroundImage(image) {
+    var img;
+    saveState();
+    if (image instanceof Image) {
+      resizeAndCenterImage(image);
+      return;
+    }
+    img = new Image();
+    img.onload = function() {
+      resizeAndCenterImage(img);
+    };
+    img.src = URL.createObjectURL(image);
+  }
+
   function clear(clearStates) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     if (clearStates) {
@@ -153,47 +193,14 @@ Painter.CanvasController = function() {
     options = newOptions;
   }
 
-  function resizeImageToCanvas(img) {
-    var ratio, orientation = img.width > img.height ? "landscape" :
-      "portrait";
-    if (orientation === "landscape") {
-      if (img.width > canvas.width) {
-        ratio = canvas.width / img.width;
-        img.setAttribute("width", canvas.width);
-        img.setAttribute("height", Math.floor(canvas.height * ratio));
-      }
-    } else {
-      if (img.height > canvas.height) {
-        ratio = canvas.height / img.height;
-        img.setAttribute("width", Math.floor(canvas.width * ratio));
-        img.setAttribute("height", canvas.height);
-      }
-    }
-    return img;
-  }
-
-  function setBackgroundImage(file, center) {
-    var x = 0,
-      y = 0,
-      img = new Image();
-    img.onload = function() {
-      img = resizeImageToCanvas(img);
-      if (center === true) {
-        x = (canvas.width - img.width) / 2;
-        y = (canvas.height - img.height) / 2;
-      }
-      drawImage(img, x, y);
-    };
-    img.src = URL.createObjectURL(file);
-  }
-
-  function init(canvasNode) {
+  function init() {
     canvas = canvasNode;
     context = canvas.getContext("2d");
     canvas.addEventListener("mousemove", onMouseMovedInCanvas);
     canvas.addEventListener("mouseleave", onMouseLeftCanvas);
     canvas.addEventListener("mousedown", onMouseDownInCanvas);
     canvas.addEventListener("mouseup", onMouseUpInCanvas);
+    return that;
   }
 
   that.init = init;
@@ -202,5 +209,5 @@ Painter.CanvasController = function() {
   that.getImage = getDataUrl;
   that.clear = clear;
   that.undo = undo;
-  return that;
+  return init();
 };

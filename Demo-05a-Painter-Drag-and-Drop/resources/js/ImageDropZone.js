@@ -1,20 +1,19 @@
 /* eslint-env browser  */
-/* global EventPublisher */
+/* global MMEventTarget */
 
-var DropTarget = function(options) { // eslint-disable-line no-unused-vars
+var Painter = Painter || {};
+Painter.ImageDropZone = function(options) {
   "use strict";
-  var that = new EventPublisher(),
-    target = options.target;
+  var that = new MMEventTarget(),
+    target,
+    fileTypes;
 
   function handleFileDrop(file) {
-    switch (file.type) {
-      case "image/jpeg":
-      case "image/jpg":
-      case "image/png":
-        that.notifyAll("imagedropped", file);
-        break;
-      default:
-        break;
+    if (fileTypes.includes(file.type)) {
+      that.dispatchEvent({
+        type: "imageDropped", 
+        data: file,
+      });
     }
   }
 
@@ -40,6 +39,8 @@ var DropTarget = function(options) { // eslint-disable-line no-unused-vars
   }
 
   function init() {
+    fileTypes = options.fileTypes;
+    target = options.target;
     target.addEventListener("dragover", onDragOver);
     target.addEventListener("dragleave", onDragLeave);
     target.addEventListener("drop", onDrop);

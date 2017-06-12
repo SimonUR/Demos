@@ -1,14 +1,13 @@
 /* eslint-env browser  */
-/* global DropTarget */
-
 var Painter = (function() {
   "use strict";
 
-  var model,
+  var that = {},
+    model,
     canvas,
     toolbox,
     palette,
-    dropTarget;
+    dropZone;
 
   function onToolSelected(event) {
     model.setTool(event.data);
@@ -18,11 +17,8 @@ var Painter = (function() {
     model.setColor(event.data);
   }
 
-  function onToolSizeChanged(event) {
-    var value = parseInt(event.data);
-    model.setWidth(value);
-    model.setRadius(value);
-    model.setWeight(value);
+  function onSizeChanged(event) {
+    model.setSize(event.data);
   }
 
   function onActionSelected(event) {
@@ -45,8 +41,8 @@ var Painter = (function() {
     canvas.setOptions(event.data);
   }
 
-  function onImageDropped(event) {
-    canvas.setBackgroundImage(event.data, true);
+  function onImageDroppedCanvas(event) {
+    canvas.setBackgroundImage(event.data);
   }
 
   function init() {
@@ -54,7 +50,7 @@ var Painter = (function() {
     initCanvas();
     initPalette();
     initToolbox();
-    initDragAndDrop();
+    initDropZone();
   }
 
   function initModel() {
@@ -63,36 +59,36 @@ var Painter = (function() {
   }
 
   function initCanvas() {
-    canvas = new Painter.CanvasController();
-    canvas.init(document.querySelector(".canvas"));
+    var canvasEl = document.querySelector(".canvas");
+    canvas = new Painter.CanvasController(canvasEl);
   }
 
   function initPalette() {
-    palette = new Painter.PaletteView();
-    palette.init(document.querySelector(".colors"));
+    var colorsEl = document.querySelector(".colors");
+    palette = new Painter.PaletteViewController(colorsEl);
     palette.addEventListener("colorSelected", onColorSelected);
     palette.setDefault();
   }
 
   function initToolbox() {
-    toolbox = new Painter.ToolboxView();
-    toolbox.init(document.querySelector(".tools"), document.querySelector(
-      ".tool-resizer"));
+    var toolsEl = document.querySelector(".tools");
+    toolbox = new Painter.ToolboxViewController(toolsEl);
     toolbox.addEventListener("toolSelected", onToolSelected);
     toolbox.addEventListener("actionSelected", onActionSelected);
-    toolbox.addEventListener("toolSizeChanged", onToolSizeChanged);
+    toolbox.addEventListener("sizeChanged", onSizeChanged);
     toolbox.setDefault();
   }
 
-  function initDragAndDrop() {
-    dropTarget = new DropTarget({
-      target: document.querySelector("#drop-target-1"),
-      hoverClass: "drop-target-active",
+  function initDropZone() {
+    var dropZoneEl = document.querySelector(".canvas");
+    dropZone = new Painter.ImageDropZone({
+      target: dropZoneEl,
+      hoverClass: "highlighted",
+      fileTypes: ["image/jpg", "image/jpeg", "image/png", ],
     });
-    dropTarget.addEventListener("imagedropped", onImageDropped);
+    dropZone.addEventListener("imageDropped", onImageDroppedCanvas);
   }
 
-  return {
-    init: init,
-  };
+  that.init = init;
+  return that;
 }());
