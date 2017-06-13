@@ -1,0 +1,35 @@
+{
+  "shopOwner": {
+    "id": "Shop",
+    "funds": 1000
+  },
+  "customer": {
+    "id": "Customer",
+    "funds": 1000
+  },
+  "items": {
+  	"shop":  [{
+      "id": "medkit",
+      "value": 100
+    }, {
+      "id": "potion",
+      "value": 100
+    }, {
+      "id": "hammer",
+      "value": 200
+    }, {
+      "id": "umbrella",
+      "value": 100
+    }],
+    "customer": [{
+      "id": "bug",
+      "value": 100
+    }, {
+      "id": "trophy",
+      "value": 500
+    }, {
+      "id": "key",
+      "value": 300
+    }]
+  }
+}

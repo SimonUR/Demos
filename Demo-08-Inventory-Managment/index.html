@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>InventoryManagment</title>
+    <link rel="stylesheet" href="vendors/fontello/css/fontello.css">
+    <link rel="stylesheet" href="resources/css/styles.css">
+    <link rel="stylesheet" href="resources/css/app.css">
+</head>
+
+<body>
+    <header>
+        <h1>Inventory Managment</h1>
+    </header>
+    <div class="decal"></div>
+    <content>
+        <div id="ui">
+            <div class="inventory shop">
+                <h1></h1>
+                <ul class="content">
+                </ul>
+                <span class="funds"></span>
+            </div>
+            <div class="inventory customer">
+                <h1></h1>
+                <ul class="content">
+                </ul>
+                <span class="funds"></span>
+            </div>
+        </div>
+    </content>
+    <script src="resources/js/helper/request.js"></script>
+    <script src="resources/js/helper/events.js"></script>
+    <script src="resources/js/InventoryManagment.js"></script>
+    <script src="resources/js/Inventory.js"></script>
+    <script src="resources/js/InventoryView.js"></script>
+    <script>
+        InventoryManagment.init();
+    </script>
+</body>
+
+</html>
