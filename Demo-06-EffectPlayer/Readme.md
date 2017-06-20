@@ -4,6 +4,8 @@
 
 > Bitte beachten Sie beim Lesen dieser Zusammenfassung auch den Code der hier beschriebenen Lösung und probieren Sie die Anwendung aus. Nicht alle Teile des Codes werden detailliert beschrieben. Schauen Sie sich die angesprochenen Stellen daher selbstständige an und informieren Sie sich über die verlinkten Ressourcen. Eine Video-Datei zum Testen finden Sie im Starterpaket.
 
+**Dieser Text bezieht sich auf eine ältere Version des Beispiels. An einigen Stellen kann die Beschreibung daher vom aktuellem Code im Repository abweichen.**
+
 ## Übersicht
 
 ![Screenshot der Anwendung](docs/screenshot-complete.png)

@@ -1,22 +1,24 @@
 /* eslint-env browser */
-/* global EventPublisher */
+/* global MMEventTarget */
 
 var EffectPlayer = EffectPlayer || {};
-EffectPlayer.VideoPlayer = function(options) {
+EffectPlayer.VideoPlayer = function(el) {
   "use strict";
 
-  var that = new EventPublisher(),
+  var that = new MMEventTarget(),
     BROADCAST_INTERVAL_IN_MS = 40,
-    broadcastInterval,
-    target = options.target;
+    broadcastInterval;
 
   function setFile(file) {
     var src = URL.createObjectURL(file);
-    target.src = src;
+    el.src = src;
   }
 
   function broadcastFrame() {
-    that.notifyAll("videoFrameAvailable", target);
+    that.dispatchEvent({
+      type: "videoFrameAvailable",
+      data: el,
+    });
   }
 
   function startBroadcasting() {
@@ -32,54 +34,54 @@ EffectPlayer.VideoPlayer = function(options) {
   }
 
   function isReady() {
-    return target.hasAttribute("src");
+    return el.hasAttribute("src");
   }
 
   function play() {
     if (!isReady()) {
       return;
     }
-    target.play();
+    el.play();
     startBroadcasting();
-    that.notifyAll("videoPlayed", null);
+    that.dispatchEvent({ type: "playbackStatusChanged", data: "play", });
   }
 
   function pause() {
     if (!isReady()) {
       return;
     }
-    target.pause();
+    el.pause();
     stopBroadcasting();
-    that.notifyAll("videoPaused", null);
+    that.dispatchEvent({ type: "playbackStatusChanged", data: "pause", });
   }
 
   function stop() {
     if (!isReady()) {
       return;
     }
-    target.pause();
-    target.currentTime = 0;
+    el.pause();
+    el.currentTime = 0;
     stopBroadcasting();
-    that.notifyAll("videoStopped", null);
+    that.dispatchEvent({ type: "playbackStatusChanged", data: "stop", });
   }
 
   function broadCastCurrentLoopMode() {
-    var currentMode = target.loop ? "loop" : "no-loop";
-    that.notifyAll("videoLoopModeChanged", currentMode);
+    var currentMode = el.loop ? "loop" : "no-loop";
+    that.dispatchEvent({ type: "videoLoopModeChanged", data: currentMode,});
   }
 
   function toogleLoopMode() {
-    target.loop = !target.loop;
+    el.loop = !el.loop;
     broadCastCurrentLoopMode();
   }
 
   function setLoopMode(mode) {
     switch (mode) {
       case "loop":
-        target.loop = true;
+        el.loop = true;
         break;
       case "no-loop":
-        target.loop = false;
+        el.loop = false;
         break;
       default:
         break;

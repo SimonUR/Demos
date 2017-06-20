@@ -1,12 +1,11 @@
 /* eslint-env browser */
-/* global DropTarget */
+/* global MMEDropZone */
 
 var EffectPlayer = EffectPlayer || (function() {
   "use strict";
 
   var that = {},
-    dropIndicator,
-    dropTarget,
+    videoDropTarget,
     player,
     videoControls,
     canvas,
@@ -14,47 +13,16 @@ var EffectPlayer = EffectPlayer || (function() {
 
   function onMovieFileDropped(event) {
     player.setFile(event.data);
-    dropIndicator.classList.add("hidden");
-  }
-
-  function onVideoButtonPressed(type) {
-    switch (type) {
-      case "play":
-        player.play();
-        break;
-      case "pause":
-        player.pause();
-        break;
-      case "stop":
-        player.stop();
-        break;
-      case "loop":
-        player.toogleLoopMode();
-        break;
-      default:
-        break;
-    }
-  }
-
-  function onFilterButtonClicked(filter) {
-    var filters = ["grayscale", "threshold", "brighten", ];
-    filters.splice(filters.indexOf(filter), 1);
-    filterControls.toggleButtonState(filter);
-    filterControls.clearButtonState(filters[0]);
-    filterControls.clearButtonState(filters[1]);
-    if (filterControls.getButtonState(filter)) {
-      canvas.setFilter(filter);
-    } else {
-      canvas.clearFilter();
-    }
+    videoDropTarget.hide();
   }
 
   function onVideoFrameAvailable(event) {
     canvas.drawVideoFrame(event.data);
   }
 
-  function onVideoPlaybackStatusChanged(status) {
-    switch (status) {
+  function onVideoPlaybackStatusChanged(event) {
+    var newStatus = event.data;
+    switch (newStatus) {
       case "play":
         videoControls.setButtonState("play");
         videoControls.clearButtonState("stop");
@@ -76,7 +44,8 @@ var EffectPlayer = EffectPlayer || (function() {
   }
 
   function onVideoLoopModeChanged(event) {
-    switch (event.data) {
+    var newMode = event.data;
+    switch (newMode) {
       case "loop":
         videoControls.setButtonState("loop");
         break;
@@ -88,24 +57,55 @@ var EffectPlayer = EffectPlayer || (function() {
     }
   }
 
-  function init() {
-    var videoContainer = document.querySelector(".video-container"),
-      canvasContainer = document.querySelector(
-        ".canvas-container");
-    initDragAndDrop(videoContainer);
-    initPlayerControls(videoContainer);
-    initPlayer(videoContainer);
-    initCanvas(canvasContainer);
-    initFilterControls(canvasContainer);
+  function onPlayerButtonClicked(event) {
+    var clickedButton = event.data;
+    switch (clickedButton) {
+      case "play":
+        player.play();
+        break;
+      case "pause":
+        player.pause();
+        break;
+      case "stop":
+        player.stop();
+        break;
+      case "loop":
+        player.toogleLoopMode();
+        break;
+      default:
+        break;
+    }
   }
 
-  function initDragAndDrop(videoContainer) {
-    dropIndicator = document.querySelector(".drag-and-drop-hint");
-    dropTarget = new DropTarget({
-      target: videoContainer,
-      hoverClass: "highlight-drop",
-    });
-    dropTarget.addEventListener("moviedropped", onMovieFileDropped);
+  function onFilterButtonClicked(event) {
+    var filter = event.data,
+      filters = ["grayscale", "threshold", "brighten", ];
+    filters.splice(filters.indexOf(filter), 1);
+    filterControls.toggleButtonState(filter);
+    filterControls.clearButtonState(filters[0]);
+    filterControls.clearButtonState(filters[1]);
+    if (filterControls.getButtonState(filter)) {
+      canvas.setFilter(filter);
+    } else {
+      canvas.clearFilter();
+    }
+  }
+
+  function init() {
+    var videoContainer = document.querySelector(".video-container"),
+      canvasContainer = document.querySelector(".canvas-container"),
+      dropIndicator = document.querySelector(".drag-and-drop-hint"),
+      videoElement = videoContainer.querySelector("video");
+    initDragAndDrop(dropIndicator);
+    initPlayer(videoElement);
+    initPlayerControls(videoContainer);
+    initFilterControls(canvasContainer);
+    initCanvas(canvasContainer);
+  }
+
+  function initDragAndDrop(dropIndicator) {
+    videoDropTarget = new MMEDropZone(dropIndicator, ["video/mp4", ]);
+    videoDropTarget.addEventListener("fileDropped", onMovieFileDropped);
   }
 
   function initPlayerControls(videoContainer) {
@@ -115,45 +115,15 @@ var EffectPlayer = EffectPlayer || (function() {
       stop: videoContainer.querySelector(".icon-stop"),
       loop: videoContainer.querySelector(".icon-loop"),
     });
-    videoControls.addEventListener("playButtonPressed",
-      onVideoButtonPressed.bind(
-        null, "play"));
-    videoControls.addEventListener("pauseButtonPressed",
-      onVideoButtonPressed
-      .bind(
-        null, "pause"));
-    videoControls.addEventListener("stopButtonPressed",
-      onVideoButtonPressed.bind(
-        null, "stop"));
-    videoControls.addEventListener("loopButtonPressed",
-      onVideoButtonPressed.bind(
-        null, "loop"));
+    videoControls.addEventListener("buttonPressed", onPlayerButtonClicked);
   }
 
-  function initPlayer(videoContainer) {
-    player = new EffectPlayer.VideoPlayer({
-      target: videoContainer.querySelector("video"),
-    });
-    player.addEventListener("videoFrameAvailable",
-      onVideoFrameAvailable);
-    player.addEventListener("videoPlayed",
-      onVideoPlaybackStatusChanged.bind(
-        null, "play"));
-    player.addEventListener("videoPaused",
-      onVideoPlaybackStatusChanged.bind(
-        null, "pause"));
-    player.addEventListener("videoStopped",
-      onVideoPlaybackStatusChanged.bind(
-        null, "stop"));
-    player.addEventListener("videoLoopModeChanged",
-      onVideoLoopModeChanged);
-    player.setLoopMode("no-loop");
-  }
-
-  function initCanvas(canvasContainer) {
-    canvas = new EffectPlayer.VideoCanvas({
-      target: canvasContainer.querySelector("canvas"),
-    });
+  function initPlayer(videoElement) {
+    player = new EffectPlayer.VideoPlayer(videoElement);
+    player.addEventListener("videoFrameAvailable", onVideoFrameAvailable);
+    player.addEventListener("playbackStatusChanged",
+      onVideoPlaybackStatusChanged);
+    player.addEventListener("videoLoopModeChanged", onVideoLoopModeChanged);
   }
 
   function initFilterControls(canvasContainer) {
@@ -162,15 +132,12 @@ var EffectPlayer = EffectPlayer || (function() {
       brighten: canvasContainer.querySelector(".icon-filter-brighten"),
       threshold: canvasContainer.querySelector(".icon-filter-threshold"),
     });
-    filterControls.addEventListener("grayscaleButtonPressed",
-      onFilterButtonClicked.bind(
-        null, "grayscale"));
-    filterControls.addEventListener("thresholdButtonPressed",
-      onFilterButtonClicked.bind(
-        null, "threshold"));
-    filterControls.addEventListener("brightenButtonPressed",
-      onFilterButtonClicked.bind(
-        null, "brighten"));
+    filterControls.addEventListener("buttonPressed", onFilterButtonClicked);
+  }
+
+  function initCanvas(canvasContainer) {
+    var canvasElement = canvasContainer.querySelector("canvas");
+    canvas = new EffectPlayer.VideoCanvas(canvasElement);
   }
 
   that.init = init;

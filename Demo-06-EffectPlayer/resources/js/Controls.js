@@ -1,11 +1,11 @@
 /* eslint-env browser */
-/* global EventPublisher */
+/* global MMEventTarget */
 
 var EffectPlayer = EffectPlayer || {};
 EffectPlayer.Controls = function(options) {
   "use strict";
 
-  var that = new EventPublisher();
+  var that = new MMEventTarget();
 
   function onButtonClicked(event) {
     var prefixLength = 10,
@@ -13,7 +13,10 @@ EffectPlayer.Controls = function(options) {
       buttonType = classString.substring(classString.lastIndexOf(
         "-controls-") + prefixLength, classString.lastIndexOf(
         "-button"));
-    that.notifyAll(buttonType + "ButtonPressed");
+    that.dispatchEvent({
+      type: "buttonPressed",
+      data: buttonType,
+    });
   }
 
   function clearButtonState(button) {

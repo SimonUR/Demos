@@ -1,17 +1,17 @@
 /* eslint-env browser */
-/* global EventPublisher */
+/* global MMEventTarget */
 
 var EffectPlayer = EffectPlayer || {};
-EffectPlayer.VideoCanvas = function(options) {
+EffectPlayer.VideoCanvas = function(el) {
   "use strict";
 
-  var that = new EventPublisher(),
-    filter = new EffectPlayer.CanvasFilter(options.target),
+  var that = new MMEventTarget(),
+    filter = new EffectPlayer.CanvasFilter(el),
     currentFilter,
-    context = options.target.getContext("2d");
+    context = el.getContext("2d");
 
   function drawVideoFrame(video) {
-    context.drawImage(video, 0, 0, options.target.width, options.target.height);
+    context.drawImage(video, 0, 0, el.width, el.height);
     if (currentFilter) {
       filter.apply(currentFilter);
     }
